@@ -28,6 +28,22 @@ services:
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
 
+  logstash:
+    container_name: logstash
+    image: logstash
+    build:
+      context: ./
+      dockerfile: ./logstash/Dockerfile
+    restart: 'no'
+    ports:
+      - 5044:5044
+      - "5044:5044/udp"
+    environment:
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
+    networks:
+      - elk_stack
+    depends_on:
+
   kibana:
     container_name: kibana
     image: kibana
