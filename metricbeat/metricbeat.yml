@@ -1,0 +1,33 @@
+#-------------------------------- Autodiscovery -------------------------------
+# Autodiscover allows you to detect changes in the system and spawn new modules as they happen.
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+metricbeat.modules:
+#------------------------------- System Module -------------------------------
+- module: system
+  metricsets:
+    - "cpu"             # CPU usage
+    - "load"            # CPU load averages
+    - "memory"          # Memory usage
+    - "network"         # Network IO
+    - "process"         # Per process metrics
+    - "process_summary" # Process summary
+    - "core"            # Per CPU core usage
+    - "diskio"          # Disk IO
+    - "socket"          # Sockets and connection info (linux only)
+#    - uptime          # System Uptime
+#    - socket_summary  # Socket summary
+#    - filesystem     # File system usage for each mountpoint
+#    - fsstat         # File system summary metrics
+#    - raid           # Raid
+#    - service        # systemd service information
+  processes: ['.*']
+  process.include_top_n:
+    by_cpu: 5
+    by_memory: 5
+  period: 10s
+  cpu.metrics:  ["percentages"]
+  core.metrics: ["percentages"]
