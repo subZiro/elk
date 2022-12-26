@@ -17,6 +17,7 @@ Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 ```
 elasticsearch:
 - http://localhost:9200
+- состояние кластера - http://localhost:9200/_cat/health
 - просмотр доступных нод кластера - http://localhost:9200/_cat/nodes
 - просмотр доступных индексов кластера - http://localhost:9200/_cat/indices
 

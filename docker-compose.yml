@@ -27,6 +27,11 @@ services:
       - elk_stack
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD", "curl", "-s" ,"-f", "elasticsearch:9200/_cat/health" ]
+      interval: 2s
+      timeout: 10s
+      retries: 30
 
   kibana:
     container_name: kibana
@@ -36,10 +41,15 @@ services:
       dockerfile: ./kibana/Dockerfile
     ports:
       - 5601:5601
-    depends_on:
-      - elasticsearch
     networks:
       - elk_stack
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "kibana:5601" ]
+      interval: 2s
+      timeout: 10s
+      retries: 30
+    depends_on:
+      elasticsearch: { condition: service_healthy }
 
   logstash:
     container_name: logstash
@@ -48,13 +58,15 @@ services:
       context: ./
       dockerfile: ./logstash/Dockerfile
     restart: 'no'
+    environment:
+      - ES_JAVA_OPTS=-Xmx256m -Xms256m
     ports:
       - 5044:5044
       - "5044:5044/udp"
-    environment:
-      - ES_JAVA_OPTS=-Xmx256m -Xms256m
     networks:
       - elk_stack
+    depends_on:
+      kibana: { condition: service_healthy }
 
   metricbeat:
     hostname: metricbeat
@@ -68,8 +80,10 @@ services:
     networks:
       - elk_stack
     volumes:
-      - metricbeat:/usr/share/metricbeat/data
+      - metricbeat:/usr/share/metricbeat/data:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      kibana: { condition: service_healthy }
 
 networks:
   elk_stack:
@@ -77,4 +91,6 @@ networks:
 
 volumes:
   elasticsearch:
+    driver: local
+  metricbeat:
     driver: local
