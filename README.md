@@ -15,7 +15,6 @@ Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 # адреса
 
 ```
-проект доступен в по адресу:
 elasticsearch:
 - http://localhost:9200
 - просмотр доступных нод кластера - http://localhost:9200/_cat/nodes
