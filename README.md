@@ -1,6 +1,10 @@
 # ELK v 0.1
 
-Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
+Elasticsearch=8.5.1
+Logstash=8.5.1 
+Kibana=8.5.1
+Filebeat=8.5.1
+Metricbeat=8.5.1
 
 ----
 
@@ -8,8 +12,10 @@ Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 
 # сборка и запуск контейнеров
 ```
-+ docker-compose -f docker-compose.yml build
-+ docker-compose -f docker-compose.yml up -d
+# build
+docker-compose -f docker-compose.yml build
+# run 
+docker-compose -f docker-compose.yml up -d
 ```
 
 # адреса
