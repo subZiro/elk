@@ -10,10 +10,6 @@ Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 ```
 + docker-compose -f docker-compose.yml build
 + docker-compose -f docker-compose.yml up -d
-
-проект доступен в по адресу:
-elastic = http://localhost:9200/
-kibana = http://localhost:5601/
 ```
 
 # Адреса
