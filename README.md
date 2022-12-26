@@ -1,4 +1,4 @@
-# ELK v0.1
+# ELK v 0.1
 
 Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 
@@ -12,15 +12,15 @@ Elasticsearch Logstash Kibana (Filebeat, Metricbeat)
 + docker-compose -f docker-compose.yml up -d
 ```
 
-# Адреса
+# адреса
 
 ```
 проект доступен в по адресу:
 elasticsearch:
-- http://127.0.0.1:9200/
-- просмотр доступных нод кластера - http://127.0.0.1:9200/_cat/nodes
-- просмотр доступных индексов кластера - http://127.0.0.1:9200/_cat/indices
+- http://localhost:9200
+- просмотр доступных нод кластера - http://localhost:9200/_cat/nodes
+- просмотр доступных индексов кластера - http://localhost:9200/_cat/indices
 
 kibana:
-- http://127.0.0.1:5601/
+- http://localhost:5601
 ```
